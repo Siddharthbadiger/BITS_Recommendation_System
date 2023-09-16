@@ -27,7 +27,7 @@ def recommend(movie):
     distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
     recommended_movie_names = []
     recommended_movie_posters = []
-    for i in distances[1:6]:
+    for i in distances[1:7]:
         # fetch the movie poster
         movie_id = movies.iloc[i[0]].movie_id
         recommended_movie_posters.append(fetch_poster(movie_id))
@@ -36,7 +36,7 @@ def recommend(movie):
     return recommended_movie_names,recommended_movie_posters
 
 
-st.header('siddharth recommendition')
+st.header('siddharth Badiger recommendition')
 movies = pickle.load(open('movie_list_1.pkl','rb'))
 similarity = pickle.load(open('similarity.pkl','rb'))
 
@@ -48,7 +48,7 @@ selected_movie = st.selectbox(
 
 if st.button('Show Recommendation'):
     recommended_movie_names,recommended_movie_posters = recommend(selected_movie)
-    col1, col2, col3, col4, col5,col6,col7 = st.columns(7)
+    col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
     with col1:
         st.text(recommended_movie_names[0])
         st.image(recommended_movie_posters[0])
